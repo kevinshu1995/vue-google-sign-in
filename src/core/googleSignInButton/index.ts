@@ -2,7 +2,7 @@ import { defineComponent, h, ref, install, onMounted } from "vue-demi";
 import type { PropType } from "vue-demi";
 import { setupGoogleBtn, CallbackResponse, ButtonThemeConfig } from "./gsi_client";
 
-interface EmitSuccessResponse {
+interface EmitSuccessPayload {
     response: CallbackResponse;
     profile: unknown;
 }
@@ -32,7 +32,11 @@ export default defineComponent({
         },
     },
 
-    emits: ["success"],
+    emits: {
+        success(payload: EmitSuccessPayload) {
+            return true;
+        },
+    },
 
     setup(props, { emit }) {
         const buttonRef = ref<HTMLInputElement | null>(null);
@@ -49,6 +53,7 @@ export default defineComponent({
                 },
                 callback: (response: CallbackResponse) => {
                     console.log(response);
+                    // TODO deal jwt
                     emit("success", { response, profile: response.credential });
                 },
                 clientId: props.clientId,
