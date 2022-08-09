@@ -1,7 +1,8 @@
 import { defineComponent, h, ref, install, onMounted } from "vue-demi";
-import { setupGoogleBtn, CallbackResponse } from "./gsi_client";
+import type { PropType } from "vue-demi";
+import { setupGoogleBtn, CallbackResponse, ButtonThemeConfig } from "./gsi_client";
 
-interface emitSuccessResponse {
+interface EmitSuccessResponse {
     response: CallbackResponse;
     profile: unknown;
 }
@@ -12,58 +13,18 @@ export default defineComponent({
     name: "GoogleSignInButton",
 
     props: {
-        type: {
-            type: String,
-            default: "standard",
-            validator(value: string) {
-                return ["standard", "icon"].includes(value);
-            },
-        },
-        theme: {
-            type: String,
-            default: "outline",
-            validator(value: string) {
-                return ["outline", "filled_blue", "filled_black"].includes(value);
-            },
-        },
-        size: {
-            type: String,
-            default: "large",
-            validator(value: string) {
-                return ["large", "medium", "small"].includes(value);
-            },
-        },
-        text: {
-            type: String,
-            default: "signin",
-            validator(value: string) {
-                return ["signin_with", "signup_with", "continue_with", "signin"].includes(value);
-            },
-        },
-        shape: {
-            type: String,
-            default: "rectangular",
-            validator(value: string) {
-                return ["rectangular", "pill", "circle", "square"].includes(value);
-            },
-        },
-        logo_alignment: {
-            type: String,
-            default: "left",
-            validator(value: string) {
-                return ["center", "left"].includes(value);
-            },
-        },
-        width: {
-            type: String,
-            default: "200",
-            validator(value: string) {
-                return Number(value) <= 400;
-            },
-        },
-        locale: {
-            type: String,
-            default: "",
+        buttonConfigs: {
+            type: Object as PropType<ButtonThemeConfig>,
+            default: () => ({
+                type: "standard",
+                theme: "outline",
+                size: "large",
+                text: "signin",
+                shape: "rectangular",
+                logo_alignment: "left",
+                width: "200",
+                locale: "",
+            }),
         },
         clientId: {
             type: String,
@@ -84,16 +45,7 @@ export default defineComponent({
             setupGoogleBtn({
                 button: {
                     ref: buttonRef,
-                    themeConfig: {
-                        type: props.type,
-                        theme: props.theme,
-                        size: props.size,
-                        text: props.text,
-                        shape: props.shape,
-                        logo_alignment: props.logo_alignment,
-                        width: props.width,
-                        locale: props.locale,
-                    },
+                    themeConfig: props.buttonConfigs,
                 },
                 callback: (response: CallbackResponse) => {
                     console.log(response);

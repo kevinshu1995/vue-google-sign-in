@@ -3,15 +3,16 @@ import type { Ref } from "vue-demi";
 import type { ClientId } from "./types";
 
 // customization attributes - doc https://developers.google.com/identity/gsi/web/reference/js-reference#GsiButtonConfiguration
-interface ButtonThemeConfig {
-    type: string;
-    theme: string;
-    size: string;
-    text: string;
-    shape: string;
-    logo_alignment: string;
-    width: string;
-    locale: string;
+export interface ButtonThemeConfig {
+    type?: "standard" | "icon";
+    theme?: "outline" | "filled_blue" | "filled_black";
+    size?: "large" | "medium" | "small";
+    text?: "signin_with" | "signup_with" | "continue_with" | "signin";
+    shape?: "rectangular" | "pill" | "circle" | "square";
+    logo_alignment?: "center" | "left";
+    // TODO max number is 400
+    width?: string;
+    locale?: string;
 }
 
 interface InitGoogleConfig {
