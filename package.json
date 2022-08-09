@@ -18,7 +18,8 @@
         }
     },
     "dependencies": {
-        "vue": "^3.2.37",
+        "@types/gapi": "^0.0.42",
+        "vue": "^2.0.0 || >=3.0.0",
         "vue-demi": "^0.13.6"
     },
     "devDependencies": {
@@ -28,4 +29,3 @@
         "vue-tsc": "^0.38.4"
     }
 }
-
