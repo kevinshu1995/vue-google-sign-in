@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import GoogleSignInButton from "./components/GoogleSignInButton.vue";
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from "./components/HelloWorld.vue";
+import GoogleButton from "./core/googleSignInButton";
 
 const clientId: string = import.meta.env.VITE_GOOGLE_SIGN_IN_ID;
 </script>
@@ -17,7 +15,7 @@ const clientId: string = import.meta.env.VITE_GOOGLE_SIGN_IN_ID;
         </a>
     </div>
     <HelloWorld msg="Vite + Vue" />
-    <GoogleSignInButton :client-id="clientId" />
+    <GoogleButton :client-id="clientId" />
 </template>
 
 <style scoped>
@@ -33,4 +31,3 @@ const clientId: string = import.meta.env.VITE_GOOGLE_SIGN_IN_ID;
     filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>
-

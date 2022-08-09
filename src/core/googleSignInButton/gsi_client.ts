@@ -1,6 +1,6 @@
-import type { ClientId } from "./types";
 import { unref } from "vue-demi";
 import type { Ref } from "vue-demi";
+import type { ClientId } from "./types";
 
 // customization attributes - doc https://developers.google.com/identity/gsi/web/reference/js-reference#GsiButtonConfiguration
 interface ButtonThemeConfig {
@@ -58,4 +58,3 @@ const setupGoogleBtn = (configs: InitGoogleConfig): void => {
 };
 
 export { setupGoogleBtn };
-
