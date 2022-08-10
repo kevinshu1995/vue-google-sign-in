@@ -309,6 +309,16 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@kevin_hws/vue-google-sign-in@file:":
+  "resolved" "file:"
+  "version" "0.1.2"
+  dependencies:
+    "@kevin_hws/vue-google-sign-in" "file:"
+    "@types/gapi" "^0.0.42"
+    "jwt-decode" "^3.1.2"
+    "vue" "^2.0.0 || >=3.0.0"
+    "vue-demi" "^0.13.6"
+
 "@types/gapi@^0.0.42":
   "integrity" "sha512-kskWpouTGqutaIVRo/swiGnMVoRxOYdRwvaDrh0yavfR9vQoHvJJ7Enp4KE9MEGS8qF7F5KiP6bRNOYcCgRXCA=="
   "resolved" "https://registry.npmjs.org/@types/gapi/-/gapi-0.0.42.tgz"

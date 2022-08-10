@@ -1,4 +1,4 @@
-import { defineComponent, ref, install, onMounted } from "vue-demi";
+import { defineComponent, h, ref, install, onMounted, nextTick } from "vue-demi";
 import type { PropType } from "vue-demi";
 import {
     useRenderGoogleSignInBtn,
@@ -47,7 +47,9 @@ export default defineComponent({
     setup(props, { emit }) {
         const buttonRef = ref<HTMLInputElement | null>(null);
 
-        onMounted(() => {
+        onMounted(async () => {
+            await nextTick();
+            console.log("onMounted");
             if (buttonRef === null) {
                 console.error("Btn ref is null");
                 return;
@@ -71,11 +73,9 @@ export default defineComponent({
     },
 
     render() {
-        return (
-            <div class="inline-block">
-                <div class="inline-block" ref="buttonRef" />
-            </div>
-        );
+        return h("div", { class: "inline-block" }, [
+            h("div", { class: "inline-block", ref: "buttonRef" }),
+        ]);
     },
 });
 
