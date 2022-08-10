@@ -6,6 +6,7 @@ import {
     ButtonThemeConfig,
 } from "./useRenderGoogleSignInBtn";
 import jwtDecode from "jwt-decode";
+import "./style.css";
 
 interface EmitSuccessPayload {
     response: CallbackResponse;
@@ -15,7 +16,7 @@ interface EmitSuccessPayload {
 install();
 
 export default defineComponent({
-    name: "GoogleSignInButton",
+    name: "VueGoogleSignInButton",
 
     props: {
         buttonConfigs: {
