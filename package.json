@@ -1,7 +1,21 @@
 {
     "name": "vue-google-sign-in",
-    "private": true,
-    "version": "0.0.0",
+    "version": "0.1.0",
+    "description": "Google Sign-In for Vue.js",
+    "keywords": [
+        "vue",
+        "google",
+        "sign-in",
+        "vue-google-sign-in"
+    ],
+    "private": false,
+    "license": "MIT",
+    "author": {
+        "name": "Kevin Hsu",
+        "email": "kevin.hsu.hws@gmail.com"
+    },
+    "repository": "https://github.com/kevinshu1995/vue-google-sign-in",
+    "bugs": "https://github.com/kevinshu1995/vue-google-sign-in/issues",
     "type": "module",
     "main": "./dist/index.umd.js",
     "module": "./dist/index.es.js",
@@ -17,7 +31,7 @@
     },
     "types": "./dist/types/lib_main.d.ts",
     "scripts": {
-        "dev": "vite",
+        "dev": "vite --host",
         "build:demo": "vue-tsc --noEmit && vite build --config vite.demo.ts",
         "build:package": "vite build && vue-tsc --emitDeclarationOnly && mv dist/lib dist/types",
         "preview": "vite preview --config vite.demo.ts"
