@@ -8,45 +8,45 @@ Now it's Support
 -   [ ] One Tap UX mode
 -   [ ] Render official button (You could do a bit customization)
 
-## Install
-
-TODO
-
 ## Demo
 
 TODO
 
-## Usage
+## Install
 
-TODO
+```bash
+$ npm i @kevin_hws/vue-google-sign-in
 
-<!-- prettier-ignore-start -->
+$ yarn add @kevin_hws/vue-google-sign-in
+
+$ pnpm i @kevin_hws/vue-google-sign-in
+```
+
 ```html
 <script setup lang="ts">
-    import GoogleButton from "./../lib/googleSignInButton";
+    import VueGoogleSignInButton from "@kevin_hws/vue-google-sign-in";
 
     const clientId: string = `XXXXXXXXXXXX.apps.googleusercontent.com`; // Your google client id
 </script>
 
 <template>
     <div>
-        <GoogleButton
+        <VueGoogleSignInButton
             :client-id="clientId"
             :button-configs="{
-                type: "standard",
-                theme: "filled_black",
-                size: "large",
-                text: "signin_with",
-                shape: "pill",
-                logo_alignment: "left",
-                width: "300",
-                locale: "en",
+                type: 'standard',
+                theme: 'filled_black',
+                size: 'large',
+                text: 'signin_with',
+                shape: 'pill',
+                logo_alignment: 'left',
+                width: '300',
+                locale: 'en',
             }"
         />
     </div>
 </template>
 ```
-<!-- prettier-ignore-end -->
 
 ##
 
