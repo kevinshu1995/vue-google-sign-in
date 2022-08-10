@@ -1,6 +1,6 @@
 {
     "name": "@kevin_hws/vue-google-sign-in",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Google Sign-In for Vue.js",
     "keywords": [
         "vue",
@@ -20,7 +20,8 @@
     "main": "./dist/index.umd.js",
     "module": "./dist/index.es.js",
     "files": [
-        "dist"
+        "/dist/*",
+        "/dist/types/**"
     ],
     "exports": {
         ".": {
@@ -34,7 +35,8 @@
         "dev": "vite --host",
         "build:demo": "vue-tsc --noEmit && vite build --config vite.demo.ts",
         "build:package": "vite build && vue-tsc --emitDeclarationOnly && mv dist/lib dist/types",
-        "preview": "vite preview --config vite.demo.ts"
+        "preview": "vite preview --config vite.demo.ts",
+        "publish": "npm publish --access publish"
     },
     "peerDependencies": {
         "@vue/composition-api": "^1.0.0-rc.1",
