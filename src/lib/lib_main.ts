@@ -3,3 +3,5 @@ import { useRenderGoogleSignInBtn } from "./composables/useRenderGoogleSignInBtn
 
 export { VueGoogleSignInButton, useRenderGoogleSignInBtn };
 
+export default VueGoogleSignInButton;
+
