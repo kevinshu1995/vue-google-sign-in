@@ -1,4 +1,4 @@
-import { defineComponent, h, ref, install, onMounted, nextTick } from "vue-demi";
+import { defineComponent, h, ref, install, onMounted } from "vue-demi";
 import type { PropType } from "vue-demi";
 import {
     useRenderGoogleSignInBtn,
@@ -7,11 +7,6 @@ import {
 } from "./useRenderGoogleSignInBtn";
 import jwtDecode from "jwt-decode";
 import "./style.css";
-
-interface EmitSuccessPayload {
-    response: CallbackResponse;
-    profile: unknown;
-}
 
 install();
 
@@ -38,22 +33,17 @@ export default defineComponent({
         },
     },
 
-    emits: {
-        success(payload: EmitSuccessPayload) {
-            return true;
-        },
-    },
+    emits: ["success"],
 
     setup(props, { emit }) {
         const buttonRef = ref<HTMLInputElement | null>(null);
 
-        onMounted(async () => {
-            await nextTick();
-            console.log("onMounted");
+        onMounted(() => {
             if (buttonRef === null) {
                 console.error("Btn ref is null");
                 return;
             }
+
             useRenderGoogleSignInBtn({
                 button: {
                     ref: buttonRef,
@@ -67,15 +57,11 @@ export default defineComponent({
             });
         });
 
-        return {
-            buttonRef,
+        return () => {
+            return h("div", { class: "inline-block" }, [
+                h("div", { class: "inline-block", ref: buttonRef }),
+            ]);
         };
-    },
-
-    render() {
-        return h("div", { class: "inline-block" }, [
-            h("div", { class: "inline-block", ref: "buttonRef" }),
-        ]);
     },
 });
 
