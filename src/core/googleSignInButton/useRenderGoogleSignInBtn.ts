@@ -54,8 +54,6 @@ const initGoogle = (configs: InitGoogleConfig): void => {
     g.accounts.id.renderButton(unref(button.ref), button.themeConfig);
 };
 
-const setupGoogleBtn = (configs: InitGoogleConfig): void => {
+export const useRenderGoogleSignInBtn = (configs: InitGoogleConfig): void => {
     loadGoogleScript(() => initGoogle(configs));
 };
-
-export { setupGoogleBtn };

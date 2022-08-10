@@ -1,6 +1,11 @@
-import { defineComponent, h, ref, install, onMounted } from "vue-demi";
+import { defineComponent, ref, install, onMounted } from "vue-demi";
 import type { PropType } from "vue-demi";
-import { setupGoogleBtn, CallbackResponse, ButtonThemeConfig } from "./gsi_client";
+import {
+    useRenderGoogleSignInBtn,
+    CallbackResponse,
+    ButtonThemeConfig,
+} from "./useRenderGoogleSignInBtn";
+import jwtDecode from "jwt-decode";
 
 interface EmitSuccessPayload {
     response: CallbackResponse;
@@ -46,15 +51,14 @@ export default defineComponent({
                 console.error("Btn ref is null");
                 return;
             }
-            setupGoogleBtn({
+            useRenderGoogleSignInBtn({
                 button: {
                     ref: buttonRef,
                     themeConfig: props.buttonConfigs,
                 },
                 callback: (response: CallbackResponse) => {
-                    console.log(response);
-                    // TODO deal jwt
-                    emit("success", { response, profile: response.credential });
+                    console.log(response, jwtDecode(response.credential));
+                    emit("success", { response, profile: jwtDecode(response.credential) });
                 },
                 clientId: props.clientId,
             });
@@ -66,9 +70,11 @@ export default defineComponent({
     },
 
     render() {
-        return h("div", { class: "inline-block" }, [
-            h("div", { class: "inline-block", ref: "buttonRef" }),
-        ]);
+        return (
+            <div class="inline-block">
+                <div class="inline-block" ref="buttonRef" />
+            </div>
+        );
     },
 });
 
