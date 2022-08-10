@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import GoogleButton from "../lib/googleSignInButton";
-import type { ButtonThemeConfig } from "./../lib/googleSignInButton/useRenderGoogleSignInBtn";
+import { VueGoogleSignInButton } from "../lib/lib_main";
+import type { ButtonThemeConfig } from "../lib/composables/useRenderGoogleSignInBtn";
 
 const clientId: string = import.meta.env.VITE_GOOGLE_SIGN_IN_ID;
 const btnConfigs: ButtonThemeConfig = {
@@ -16,5 +16,6 @@ const btnConfigs: ButtonThemeConfig = {
 </script>
 
 <template>
-    <GoogleButton :client-id="clientId" :button-configs="btnConfigs" />
+    <VueGoogleSignInButton :client-id="clientId" :button-configs="btnConfigs" />
 </template>
+

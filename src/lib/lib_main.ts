@@ -1,5 +1,5 @@
-import VueGoogleSignInButton from "./googleSignInButton";
-import { useRenderGoogleSignInBtn } from "./googleSignInButton/useRenderGoogleSignInBtn";
+import VueGoogleSignInButton from "./components/SignInButton";
+import { useRenderGoogleSignInBtn } from "./composables/useRenderGoogleSignInBtn";
 
 export { VueGoogleSignInButton, useRenderGoogleSignInBtn };
 

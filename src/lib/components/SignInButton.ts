@@ -4,7 +4,7 @@ import {
     useRenderGoogleSignInBtn,
     CallbackResponse,
     ButtonThemeConfig,
-} from "./useRenderGoogleSignInBtn";
+} from "../composables/useRenderGoogleSignInBtn";
 import jwtDecode from "jwt-decode";
 import "./style.css";
 
