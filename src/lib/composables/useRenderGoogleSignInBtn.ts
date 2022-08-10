@@ -55,6 +55,7 @@ const initGoogle = (configs: InitGoogleConfig): void => {
 };
 
 export const useRenderGoogleSignInBtn = (configs: InitGoogleConfig): void => {
+    // TODO make sure the script is only loaded or initialized once
     console.log("before loadGoogleScript");
     loadGoogleScript(() => initGoogle(configs));
 };

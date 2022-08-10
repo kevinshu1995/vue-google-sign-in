@@ -58,6 +58,7 @@ export default defineComponent({
         });
 
         return () => {
+            // TODO support passing attrs & slots
             return h("div", { class: "inline-block" }, [
                 h("div", { class: "inline-block", ref: buttonRef }),
             ]);
