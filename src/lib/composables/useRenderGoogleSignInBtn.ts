@@ -38,7 +38,7 @@ const loadGoogleScript = (fn: any): void => {
     const script = document.createElement("script");
     script.onload = () => {
         fn();
-        console.info(`Script is loaded. src:${googleScriptSrc}`);
+        // console.info(`Script is loaded. src:${googleScriptSrc}`);
     };
     script.src = googleScriptSrc;
     document.head.appendChild(script);
@@ -56,7 +56,7 @@ const initGoogle = (configs: InitGoogleConfig): void => {
 
 export const useRenderGoogleSignInBtn = (configs: InitGoogleConfig): void => {
     // TODO make sure the script is only loaded or initialized once
-    console.log("before loadGoogleScript");
+    // console.log("before loadGoogleScript");
     loadGoogleScript(() => initGoogle(configs));
 };
 

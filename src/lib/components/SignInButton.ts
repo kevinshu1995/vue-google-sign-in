@@ -50,7 +50,7 @@ export default defineComponent({
                     themeConfig: props.buttonConfigs,
                 },
                 callback: (response: CallbackResponse) => {
-                    console.log(response, jwtDecode(response.credential));
+                    // console.log(response, jwtDecode(response.credential));
                     emit("success", { response, profile: jwtDecode(response.credential) });
                 },
                 clientId: props.clientId,
