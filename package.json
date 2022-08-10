@@ -20,7 +20,7 @@
         "dev": "vite",
         "build:demo": "vue-tsc --noEmit && vite build --config vite.demo.ts",
         "build:package": "vite build && vue-tsc --emitDeclarationOnly && mv dist/lib dist/types",
-        "preview": "vite preview"
+        "preview": "vite preview --config vite.demo.ts"
     },
     "peerDependencies": {
         "@vue/composition-api": "^1.0.0-rc.1",
