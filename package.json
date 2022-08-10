@@ -1,5 +1,5 @@
 {
-    "name": "vue-google-sign-in",
+    "name": "@kevin_hws/vue-google-sign-in",
     "version": "0.1.0",
     "description": "Google Sign-In for Vue.js",
     "keywords": [
