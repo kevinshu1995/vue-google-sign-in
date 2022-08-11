@@ -37,7 +37,7 @@ export default defineComponent({
 
         onMounted(() => {
             if (buttonRef === null) {
-                console.error("Btn ref is null");
+                console.error("Btn ref is null please check your code");
                 return;
             }
 
@@ -47,10 +47,10 @@ export default defineComponent({
                     themeConfig: props.buttonConfigs,
                 },
                 callback: (response: CallbackResponse) => {
-                    // console.log(response, jwtDecode(response.credential));
                     emit("success", { response, profile: jwtDecode(response.credential) });
                 },
                 clientId: props.clientId,
+                debug: true,
             });
         });
 

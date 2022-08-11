@@ -28,4 +28,5 @@ export interface GsiBtnConfig {
         HTMLElement: HTMLInputElement | null;
         themeConfig: ButtonThemeConfig;
     };
+    debug?: Boolean;
 }

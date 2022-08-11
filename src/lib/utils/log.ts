@@ -1,8 +1,11 @@
-export default (isDebug: Boolean = false) => {
+export interface CustomConsole {
+    [key: string]: Function;
+}
+
+export const Log = (isDebug: Boolean = false): CustomConsole | null => {
     // TODO detect environment is production or development
-    if (window === undefined) return;
-    if (isDebug === false) return;
-    const _console: Console | undefined = window.console;
+    if (window === undefined) return null;
+    if (isDebug === false) return null;
 
     return {
         ...Object.entries({ ...console }).reduce((acc, [key, value]) => {
@@ -13,4 +16,3 @@ export default (isDebug: Boolean = false) => {
         }, {}),
     };
 };
-
