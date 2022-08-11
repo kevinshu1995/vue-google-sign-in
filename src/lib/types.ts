@@ -19,7 +19,12 @@ export interface CallbackResponse {
     select_by: string;
 }
 
-export type OnSignInSuccess = (response: CallbackResponse) => void;
+export type OnSignInSuccess = (response: CallbackDecode) => void;
+
+export interface CallbackDecode {
+    response: CallbackResponse;
+    profile: any;
+}
 
 export interface GsiBtnConfig {
     callback: OnSignInSuccess;

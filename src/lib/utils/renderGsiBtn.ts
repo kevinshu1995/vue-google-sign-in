@@ -1,5 +1,6 @@
-import type { GsiBtnConfig } from "../types";
+import jwtDecode from "jwt-decode";
 import { Log } from "../utils/log";
+import type { CallbackResponse, CallbackDecode, GsiBtnConfig } from "../types";
 import type { CustomConsole } from "../utils/log";
 
 interface GsiBtn {
@@ -30,13 +31,18 @@ export function RenderGsiBtn(configs: GsiBtnConfig): GsiBtn {
     const log: CustomConsole | null = Log(configs.debug ?? false);
     const initialize = () => {
         log?.info("before loading google script");
+
+        // * decode response with jwt_decode
+        configs.callback = (response: any) => {
+            const decode: CallbackDecode = {
+                response,
+                profile: jwtDecode(response.credential),
+            };
+            log?.info("Response: ", decode);
+            return () => configs.callback(decode);
+        };
         loadGoogleScript(() => {
             log?.info("google script loaded. now initializing and render button");
-            configs.callback = (...args) => {
-                // configs.callback(args);
-                log?.info("Response: ", ...args);
-                return () => configs.callback(...args);
-            };
             initGoogle(configs);
         });
     };

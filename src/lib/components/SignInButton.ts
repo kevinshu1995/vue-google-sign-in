@@ -1,8 +1,7 @@
 import type { PropType } from "vue-demi";
-import type { CallbackResponse, ButtonThemeConfig } from "../types";
+import type { CallbackDecode, ButtonThemeConfig } from "../types";
 import { defineComponent, h, ref, install, onMounted, unref } from "vue-demi";
 import { useRenderGoogleSignInBtn } from "../composables/useRenderGoogleSignInBtn";
-import jwtDecode from "jwt-decode";
 import "./style.css";
 
 install();
@@ -46,8 +45,8 @@ export default defineComponent({
                     HTMLElement: unref(buttonRef),
                     themeConfig: props.buttonConfigs,
                 },
-                callback: (response: CallbackResponse) => {
-                    emit("success", { response, profile: jwtDecode(response.credential) });
+                callback: (response: CallbackDecode) => {
+                    emit("success", response);
                 },
                 clientId: props.clientId,
                 debug: true,
