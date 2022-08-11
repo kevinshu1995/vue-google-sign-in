@@ -28,5 +28,8 @@ export default defineConfig({
     optimizeDeps: {
         exclude: ["vue-demi"],
     },
+    resolve: {
+        dedupe: ["vue", "vue-demi"],
+    },
 });
 

@@ -1,6 +1,6 @@
 import type { PropType } from "vue-demi";
 import type { CallbackDecode, ButtonThemeConfig } from "../types";
-import { defineComponent, h, ref, install, onMounted, unref } from "vue-demi";
+import { defineComponent, h, ref, install, watchEffect, unref } from "vue-demi";
 import { useRenderGoogleSignInBtn } from "../composables/useRenderGoogleSignInBtn";
 import "./style.css";
 
@@ -32,32 +32,30 @@ export default defineComponent({
     emits: ["success"],
 
     setup(props, { emit }) {
-        const buttonRef = ref<HTMLInputElement | null>(null);
+        const buttonRef = ref<HTMLElement | null>(null);
 
-        onMounted(() => {
-            if (buttonRef === null) {
-                console.error("Btn ref is null please check your code");
-                return;
+        watchEffect(() => {
+            if (buttonRef.value !== null) {
+                console.log(buttonRef);
+
+                useRenderGoogleSignInBtn({
+                    button: {
+                        HTMLElement: unref(buttonRef),
+                        themeConfig: props.buttonConfigs,
+                    },
+                    callback: (response: CallbackDecode) => {
+                        emit("success", response);
+                    },
+                    clientId: props.clientId,
+                    debug: true,
+                });
             }
-
-            useRenderGoogleSignInBtn({
-                button: {
-                    HTMLElement: unref(buttonRef),
-                    themeConfig: props.buttonConfigs,
-                },
-                callback: (response: CallbackDecode) => {
-                    emit("success", response);
-                },
-                clientId: props.clientId,
-                debug: true,
-            });
         });
 
-        return () => {
-            // TODO support passing attrs & slots
-            return h("div", { class: "inline-block" }, [
-                h("div", { class: "inline-block", ref: buttonRef }),
-            ]);
-        };
+        return { buttonRef };
+    },
+    render() {
+        // TODO support passing attrs & slots
+        return h("div", { class: "inline-block", ref: "buttonRef" });
     },
 });
