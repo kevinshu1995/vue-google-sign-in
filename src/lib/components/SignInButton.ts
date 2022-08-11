@@ -1,10 +1,7 @@
-import { defineComponent, h, ref, install, onMounted } from "vue-demi";
 import type { PropType } from "vue-demi";
-import {
-    useRenderGoogleSignInBtn,
-    CallbackResponse,
-    ButtonThemeConfig,
-} from "../composables/useRenderGoogleSignInBtn";
+import type { CallbackResponse, ButtonThemeConfig } from "../types";
+import { defineComponent, h, ref, install, onMounted, unref } from "vue-demi";
+import { useRenderGoogleSignInBtn } from "../composables/useRenderGoogleSignInBtn";
 import jwtDecode from "jwt-decode";
 import "./style.css";
 
@@ -46,7 +43,7 @@ export default defineComponent({
 
             useRenderGoogleSignInBtn({
                 button: {
-                    ref: buttonRef,
+                    HTMLElement: unref(buttonRef),
                     themeConfig: props.buttonConfigs,
                 },
                 callback: (response: CallbackResponse) => {
@@ -65,4 +62,3 @@ export default defineComponent({
         };
     },
 });
-
