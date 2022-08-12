@@ -27,10 +27,27 @@ export default defineComponent({
             type: String,
             required: true,
         },
+        triggerPrompt: {
+            type: Boolean,
+            default: false,
+        },
         debug: {
             type: Boolean,
             default: false,
         },
+
+        promptParentId: String,
+        autoSelect: Boolean,
+        loginUri: URL,
+        nativeCallback: Function,
+        cancelOnTapOutside: Function,
+        nonce: String,
+        context: String,
+        stateCookie_domain: String,
+        uxMode: String,
+        allowedParentOrigin: [String, Array],
+        intermediateIframeCloseCallback: Function,
+        itpSupport: Boolean,
     },
 
     emits: ["success"],
@@ -40,16 +57,23 @@ export default defineComponent({
 
         onMounted(() => {
             if (buttonRef.value !== null) {
+                const { buttonConfigs, clientId, ...otherConfigs } = props;
+
+                const filterOtherConfigs = Object.entries(otherConfigs)
+                    .filter(([key, value]) => value !== undefined)
+                    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+
                 useRenderGoogleSignInBtn({
                     button: {
                         HTMLElement: unref(buttonRef),
-                        themeConfig: props.buttonConfigs,
+                        themeConfig: buttonConfigs,
                     },
                     callback: (response: CallbackDecode) => {
                         emit("success", response);
                     },
-                    clientId: props.clientId,
-                    debug: props.debug,
+                    clientId,
+                    // filter undefined props
+                    ...filterOtherConfigs,
                 });
             }
         });

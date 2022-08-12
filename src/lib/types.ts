@@ -28,10 +28,24 @@ export interface CallbackDecode {
 
 export interface GsiBtnConfig {
     callback: OnSignInSuccess;
-    clientId: ClientId;
     button: {
         HTMLElement: HTMLElement | null;
         themeConfig: ButtonThemeConfig;
     };
+    triggerPrompt?: Boolean;
     debug?: Boolean;
+    // configs for google api
+    clientId: ClientId;
+    promptParent_id?: String;
+    autoSelect?: Boolean;
+    loginUri?: URL;
+    nativeCallback?: Function;
+    cancelOnTapOutside?: Function;
+    nonce?: String;
+    context?: "signin" | "signup" | "use";
+    stateCookieDomain?: String;
+    uxMode?: "popup" | "redirect";
+    allowedParentOrigin?: string | string[];
+    intermediateIframeCloseCallback?: Function;
+    itpSupport?: Boolean;
 }

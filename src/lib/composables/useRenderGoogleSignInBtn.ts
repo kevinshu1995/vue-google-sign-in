@@ -4,5 +4,5 @@ import { RenderGsiBtn } from "../utils/renderGsiBtn";
 
 export const useRenderGoogleSignInBtn = (configs: GsiBtnConfig): void => {
     configs.button.HTMLElement = unref(configs.button.HTMLElement);
-    const gsiBtn = RenderGsiBtn(configs);
+    RenderGsiBtn(configs);
 };

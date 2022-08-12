@@ -1,9 +1,11 @@
 import jwtDecode from "jwt-decode";
-import { Log } from "../utils/log";
-import type { CallbackResponse, CallbackDecode, GsiBtnConfig } from "../types";
-import type { CustomConsole } from "../utils/log";
+import { camelToSnake } from "../utils/stringFormat";
+import { Log, type CustomConsole } from "../utils/log";
+import type { CallbackDecode, GsiBtnConfig } from "../types";
 
-interface GsiBtn {
+export type prompt = () => void;
+
+export interface GsiBtn {
     log: CustomConsole | null;
 }
 
@@ -30,14 +32,29 @@ const loadGoogleScript = (fn: any): void => {
 
 const initGoogle = (configs: GsiBtnConfig): void => {
     const g = (window as any).google;
-    const { callback, clientId, button } = configs;
+    const { button, triggerPrompt, debug, callback, ...otherConfigs } = configs;
 
     if (state.isInitialized === false) {
         state.isInitialized = true;
 
+        // console.log(
+        //     Object.entries(otherConfigs).reduce((acc, [key, value]) => {
+        //         if (value === undefined) return acc;
+        //         return {
+        //             ...acc,
+        //             [camelToSnake(key)]: value,
+        //         };
+        //     }, {})
+        // );
+
         g.accounts.id.initialize({
-            client_id: clientId,
-            callback,
+            ...Object.entries(otherConfigs).reduce((acc, [key, value]) => {
+                if (value === undefined) return acc;
+                return {
+                    ...acc,
+                    [camelToSnake(key)]: value,
+                };
+            }, {}),
         });
     }
     g.accounts.id.renderButton(button.HTMLElement, button.themeConfig);
@@ -45,6 +62,8 @@ const initGoogle = (configs: GsiBtnConfig): void => {
 
 export function RenderGsiBtn(configs: GsiBtnConfig): GsiBtn {
     const log: CustomConsole | null = Log(configs.debug ?? false);
+
+    const { triggerPrompt } = configs;
 
     const initialize = () => {
         log?.info("before loading google script");
@@ -62,6 +81,11 @@ export function RenderGsiBtn(configs: GsiBtnConfig): GsiBtn {
         loadGoogleScript(() => {
             log?.info("google script loaded. now initializing and render button");
             initGoogle(configs);
+
+            const g = (window as any).google;
+            if (g && triggerPrompt) {
+                g.accounts.id.prompt();
+            }
         });
     };
 
