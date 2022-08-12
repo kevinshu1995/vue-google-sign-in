@@ -1,5 +1,9 @@
 # vue-google-sign-in
 
+[![GitHub latest tag](https://img.shields.io/github/tag/kevinshu1995/vue-google-sign-in.svg)](https://github.com/kevin/vue-google-sign-in/tags/)
+[![GitHub latest commit](https://badgen.net/github/last-commit/kevinshu1995/vue-google-sign-in)](https://GitHub.com/kevinshu1995/vue-google-sign-in/commit/)
+[![GitHub license](https://img.shields.io/github/license/kevinshu1995/vue-google-sign-in)](https://github.com/kevinshu1995/vue-google-sign-in/blob/master/LICENSE)
+
 A simple Vue component for [Sign in With Google][sign in with google].
 Just import the component and pass your client id as a component prop, and vue-google-sign-in would do all the stuff for you!
 
