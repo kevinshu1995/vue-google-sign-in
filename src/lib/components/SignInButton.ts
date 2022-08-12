@@ -27,6 +27,10 @@ export default defineComponent({
             type: String,
             required: true,
         },
+        debug: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     emits: ["success"],
@@ -35,22 +39,19 @@ export default defineComponent({
         const buttonRef = ref<HTMLElement | null>(null);
 
         onMounted(() => {
-            if (buttonRef === null) {
-                console.error("Btn ref is null please check your code");
-                return;
+            if (buttonRef.value !== null) {
+                useRenderGoogleSignInBtn({
+                    button: {
+                        HTMLElement: unref(buttonRef),
+                        themeConfig: props.buttonConfigs,
+                    },
+                    callback: (response: CallbackDecode) => {
+                        emit("success", response);
+                    },
+                    clientId: props.clientId,
+                    debug: props.debug,
+                });
             }
-
-            useRenderGoogleSignInBtn({
-                button: {
-                    HTMLElement: unref(buttonRef),
-                    themeConfig: props.buttonConfigs,
-                },
-                callback: (response: CallbackDecode) => {
-                    emit("success", response);
-                },
-                clientId: props.clientId,
-                debug: true,
-            });
         });
 
         return { buttonRef };
