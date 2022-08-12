@@ -1,6 +1,7 @@
 # vue-google-sign-in
 
-[![GitHub latest tag](https://img.shields.io/github/tag/kevinshu1995/vue-google-sign-in.svg)](https://github.com/kevin/vue-google-sign-in/tags/)
+[![GitHub latest tag](https://img.shields.io/github/package-json/v/kevinshu1995/vue-google-sign-in)](https://github.com/kevin/vue-google-sign-in/tags/)
+[![GitHub Repo Size](https://img.shields.io/github/repo-size/kevinshu1995/vue-google-sign-in)](https://github.com/kevinshu1995/vue-google-sign-in/blob/master/LICENSE)
 [![GitHub latest commit](https://badgen.net/github/last-commit/kevinshu1995/vue-google-sign-in)](https://GitHub.com/kevinshu1995/vue-google-sign-in/commit/)
 [![GitHub license](https://img.shields.io/github/license/kevinshu1995/vue-google-sign-in)](https://github.com/kevinshu1995/vue-google-sign-in/blob/master/LICENSE)
 
