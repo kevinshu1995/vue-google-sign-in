@@ -1,7 +1,6 @@
 import jwtDecode from "jwt-decode";
-import { camelToSnake } from "../utils/stringFormat";
 import { Log, type CustomConsole } from "../utils/log";
-import type { CallbackDecode, GsiBtnConfig } from "../types";
+import type { CallbackDecode, GsiBtnConfig, Window } from "../types";
 
 export type prompt = () => void;
 
@@ -20,7 +19,7 @@ const state: State = {
 };
 
 const loadGoogleScript = (fn: any): void => {
-    if ((window as any).google !== undefined) {
+    if ((window as Window).google !== undefined) {
         fn();
         return;
     }
@@ -30,34 +29,36 @@ const loadGoogleScript = (fn: any): void => {
     document.head.appendChild(script);
 };
 
-const initGoogle = (configs: GsiBtnConfig): void => {
-    const g = (window as any).google;
+const initGoogle = (configs: GsiBtnConfig, log: CustomConsole | null): void => {
+    const g = (window as Window).google;
+    if (g === undefined) {
+        log?.error('"google" is not defined');
+        return;
+    }
+
     const { button, triggerPrompt, debug, callback, ...otherConfigs } = configs;
 
     if (state.isInitialized === false) {
         state.isInitialized = true;
-
-        // console.log(
-        //     Object.entries(otherConfigs).reduce((acc, [key, value]) => {
-        //         if (value === undefined) return acc;
-        //         return {
-        //             ...acc,
-        //             [camelToSnake(key)]: value,
-        //         };
-        //     }, {})
-        // );
-
+        // * decode response with jwt_decode
         g.accounts.id.initialize({
-            ...Object.entries(otherConfigs).reduce((acc, [key, value]) => {
-                if (value === undefined) return acc;
-                return {
-                    ...acc,
-                    [camelToSnake(key)]: value,
+            callback: response => {
+                const decode: CallbackDecode = {
+                    response,
+                    profile: response.credential ? jwtDecode(response.credential) : null,
                 };
-            }, {}),
+                log?.info("Response: ", decode);
+                return () => configs.callback(decode);
+            },
+            ...otherConfigs,
         });
     }
-    g.accounts.id.renderButton(button.HTMLElement, button.themeConfig);
+    if (button.HTMLElement === null) {
+        return log?.error("button.HTMLElement should not be null");
+    }
+    g.accounts.id.renderButton(button.HTMLElement, button.themeConfig, () => {
+        console.log("test");
+    });
 };
 
 export function RenderGsiBtn(configs: GsiBtnConfig): GsiBtn {
@@ -68,19 +69,9 @@ export function RenderGsiBtn(configs: GsiBtnConfig): GsiBtn {
     const initialize = () => {
         log?.info("before loading google script");
 
-        // * decode response with jwt_decode
-        configs.callback = (response: any) => {
-            const decode: CallbackDecode = {
-                response,
-                profile: jwtDecode(response.credential),
-            };
-            log?.info("Response: ", decode);
-            return () => configs.callback(decode);
-        };
-
         loadGoogleScript(() => {
             log?.info("google script loaded. now initializing and render button");
-            initGoogle(configs);
+            initGoogle(configs, log);
 
             const g = (window as any).google;
             if (g && triggerPrompt) {
@@ -95,3 +86,4 @@ export function RenderGsiBtn(configs: GsiBtnConfig): GsiBtn {
         log,
     };
 }
+

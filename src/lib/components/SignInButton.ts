@@ -1,7 +1,8 @@
 import type { PropType } from "vue-demi";
-import type { CallbackDecode, ButtonThemeConfig } from "../types";
+import type { CallbackDecode, GsiButtonConfiguration } from "../types";
 import { defineComponent, h, ref, install, onMounted, unref } from "vue-demi";
 import { useRenderGoogleSignInBtn } from "../composables/useRenderGoogleSignInBtn";
+import { camelToSnake } from "../utils/stringFormat";
 import "./style.css";
 
 install();
@@ -11,7 +12,7 @@ export default defineComponent({
 
     props: {
         buttonConfigs: {
-            type: Object as PropType<ButtonThemeConfig>,
+            type: Object as PropType<GsiButtonConfiguration>,
             default: () => ({
                 type: "standard",
                 theme: "outline",
@@ -61,7 +62,7 @@ export default defineComponent({
 
                 const filterOtherConfigs = Object.entries(otherConfigs)
                     .filter(([key, value]) => value !== undefined)
-                    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+                    .reduce((acc, [key, value]) => ({ ...acc, [camelToSnake(key)]: value }), {});
 
                 useRenderGoogleSignInBtn({
                     button: {
@@ -71,7 +72,7 @@ export default defineComponent({
                     callback: (response: CallbackDecode) => {
                         emit("success", response);
                     },
-                    clientId,
+                    client_id: clientId,
                     // filter undefined props
                     ...filterOtherConfigs,
                 });
@@ -85,3 +86,4 @@ export default defineComponent({
         return h("div", { class: "inline-block", ref: "buttonRef" });
     },
 });
+
