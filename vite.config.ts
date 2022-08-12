@@ -1,15 +1,15 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import vue from "@vitejs/plugin-vue";
-import { name } from "./package.json";
+const pkg = require("./package.json");
 
 // https://vitejs.dev/config/
 export default defineConfig({
     build: {
         lib: {
-            name,
+            name: pkg.name,
             entry: resolve(__dirname, "src/lib/lib_main.ts"),
-            fileName: (format: string) => `index.${format}.js`,
+            fileName: (format: string) => `vue-google-sign-in.${format}.js`,
         },
         rollupOptions: {
             external: ["vue", "vue-demi"],
@@ -29,4 +29,3 @@ export default defineConfig({
         exclude: ["vue-demi"],
     },
 });
-

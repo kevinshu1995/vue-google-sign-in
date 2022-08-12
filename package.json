@@ -4,29 +4,34 @@
     "description": "Google Sign-In for Vue.js",
     "keywords": [
         "vue",
-        "google",
-        "sign-in",
-        "vue-google-sign-in"
+        "vue-google-sign-in",
+        "vue-components",
+        "vue2",
+        "vue3",
+        "vue-plugin",
+        "google-sign-in",
+        "sign-in"
     ],
     "private": false,
     "license": "MIT",
     "author": {
         "name": "Kevin Hsu",
-        "email": "kevin.hsu.hws@gmail.com"
+        "email": "kevin.hsu.hws@gmail.com",
+        "url": "https://github.com/kevinshu1995"
     },
     "repository": "https://github.com/kevinshu1995/vue-google-sign-in",
     "bugs": "https://github.com/kevinshu1995/vue-google-sign-in/issues",
     "type": "module",
-    "main": "./dist/index.umd.js",
-    "module": "./dist/index.es.js",
+    "main": "./dist/vue-google-sign-in.umd.js",
+    "module": "./dist/vue-google-sign-in.es.js",
     "files": [
         "/dist/*",
         "/dist/types/**"
     ],
     "exports": {
         ".": {
-            "import": "./dist/index.es.js",
-            "require": "./dist/index.umd.js"
+            "import": "./dist/vue-google-sign-in.es.js",
+            "require": "./dist/vue-google-sign-in.umd.js"
         },
         "./dist/style.css": "./dist/style.css"
     },
@@ -48,16 +53,17 @@
         }
     },
     "dependencies": {
-        "@types/gapi": "^0.0.42",
         "jwt-decode": "^3.1.2",
         "vue": "^2.0.0 || >=3.0.0",
         "vue-demi": "^0.13.6"
     },
     "devDependencies": {
+        "@types/gapi": "^0.0.42",
+        "@types/node": "^18.7.1",
         "@vitejs/plugin-vue": "^3.0.0",
-        "@vitejs/plugin-vue-jsx": "^2.0.0",
         "typescript": "^4.6.4",
         "vite": "^3.0.0",
+        "vue": "^2.0.0 || >=3.0.0",
         "vue-tsc": "^0.38.4"
     }
 }
