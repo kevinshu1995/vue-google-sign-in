@@ -19,7 +19,7 @@
         "email": "kevin.hsu.hws@gmail.com",
         "url": "https://github.com/kevinshu1995"
     },
-    "repository": "https://github.com/kevinshu1995/vue-google-sign-in",
+    "repository": "https://github.com/kevinshu1995/vue-google-sign-in.git",
     "bugs": "https://github.com/kevinshu1995/vue-google-sign-in/issues",
     "type": "module",
     "main": "./dist/vue-google-sign-in.umd.js",
