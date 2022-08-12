@@ -32,7 +32,7 @@ export default defineComponent({
     emits: ["success"],
 
     setup(props, { emit }) {
-        const buttonRef = ref<HTMLInputElement | null>(null);
+        const buttonRef = ref<HTMLElement | null>(null);
 
         onMounted(() => {
             if (buttonRef === null) {
@@ -53,11 +53,10 @@ export default defineComponent({
             });
         });
 
-        return () => {
-            // TODO support passing attrs & slots
-            return h("div", { class: "inline-block" }, [
-                h("div", { class: "inline-block", ref: buttonRef }),
-            ]);
-        };
+        return { buttonRef };
+    },
+    render() {
+        // TODO support passing attrs & slots
+        return h("div", { class: "inline-block", ref: "buttonRef" });
     },
 });

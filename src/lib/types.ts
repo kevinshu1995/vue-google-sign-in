@@ -30,7 +30,7 @@ export interface GsiBtnConfig {
     callback: OnSignInSuccess;
     clientId: ClientId;
     button: {
-        HTMLElement: HTMLInputElement | null;
+        HTMLElement: HTMLElement | null;
         themeConfig: ButtonThemeConfig;
     };
     debug?: Boolean;
