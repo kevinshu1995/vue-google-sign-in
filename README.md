@@ -1,22 +1,34 @@
-# vue-google-sign-in
+# :circus_tent: vue-google-sign-in
 
 [![GitHub latest tag](https://img.shields.io/github/package-json/v/kevinshu1995/vue-google-sign-in)](https://github.com/kevin/vue-google-sign-in/tags/)
 [![GitHub Repo Size](https://img.shields.io/github/repo-size/kevinshu1995/vue-google-sign-in)](https://github.com/kevinshu1995/vue-google-sign-in/blob/master/LICENSE)
 [![GitHub latest commit](https://badgen.net/github/last-commit/kevinshu1995/vue-google-sign-in)](https://GitHub.com/kevinshu1995/vue-google-sign-in/commit/)
 [![GitHub license](https://img.shields.io/github/license/kevinshu1995/vue-google-sign-in)](https://github.com/kevinshu1995/vue-google-sign-in/blob/master/LICENSE)
 
-A simple Vue component for [Sign in With Google][sign in with google].
-Just import the component and pass your client id as a component prop, and vue-google-sign-in would do all the stuff for you!
+<p align="center">
+    <img width="400" src="https://developers.google.com/identity/gsi/web/images/personalized-button-single_960.png"/>
+    <br/>
+    <i>A simple Vue component for <a href="https://developers.google.com/identity/gsi/web/">Sign in With Google</a>.</i>
+</p>
 
-Now it Support
+If you are migrating from [Google Sign-In JavaScript Platform Library](https://developers.google.com/identity/sign-in/web/sign-in), this might be a great decision for you.
+Just simply import this plugin as a component and pass your client id as a component prop, and then vue-google-sign-in would do all the stuff for you!
 
--   [x] popup UX mode
--   [x] Render official button which is built by Google (You could do a bit customization)
+## :rocket: Features
 
--   [ ] One Tap UX mode
--   [ ] Render my custom button with slot
+:star: Support Vue 2 (composition-api is required) and Vue 3.
 
-## Install
+:star: Popup UX mode
+
+:star: Render sign in button which is built by Google (You could do a bit customization)
+
+In progress:
+
+:small_orange_diamond: One Tap UX mode
+
+:small_orange_diamond: Render my custom button with slot
+
+## :inbox_tray: Install
 
 ```bash
 $ npm i @kevin_hws/vue-google-sign-in
@@ -30,14 +42,7 @@ $ pnpm i @kevin_hws/vue-google-sign-in
 
 For Vue 2.7 or later, import vue directly like Vue3.
 
-## Props
-
-| Prop          | Type   | default                                                                                                                                                                                               | information                                                                                                                         |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| clientId      | String | (Required) -                                                                                                                                                                                          | Google API client ID. Follow the steps [here][getclientid] to get your own client ID.                                               |
-| buttonConfigs | Object | (Optional) <pre>{<br> type: "standard",<br> theme: "outline", size: "large",<br> text: "signin",<br> shape: "rectangular",<br> logo_alignment: "left",<br> width: "200",<br> locale: "", <br>} </pre> | The button is rendered by GSI API. If you need more detail, please check it out on [GsiButtonConfiguration][gsibuttonconfiguration] |
-
-### Example
+### :bookmark: Example
 
 ```html
 <script setup lang="ts">
@@ -68,12 +73,19 @@ For Vue 2.7 or later, import vue directly like Vue3.
 </template>
 ```
 
-## Q&A
+### Props
+
+| Prop          | Type   | default                                                                                                                                                                                               | information                                                                                                                         |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| clientId      | String | (Required) -                                                                                                                                                                                          | Google API client ID. Follow the steps [here][getclientid] to get your own client ID.                                               |
+| buttonConfigs | Object | (Optional) <pre>{<br> type: "standard",<br> theme: "outline", size: "large",<br> text: "signin",<br> shape: "rectangular",<br> logo_alignment: "left",<br> width: "200",<br> locale: "", <br>} </pre> | The button is rendered by GSI API. If you need more detail, please check it out on [GsiButtonConfiguration][gsibuttonconfiguration] |
+
+## :question: Q&A
 
 -   How to get my Google API client ID ?
     -   Please follow the steps [here][getclientid] to setup **Credential** and **OAuth Consent Screen**
 
-## Reference
+## :memo: Reference
 
 -   [Sign in With Google][sign in with google]
 -   [google/google-api-javascript-client](https://github.com/google/google-api-javascript-client)
@@ -82,3 +94,4 @@ For Vue 2.7 or later, import vue directly like Vue3.
 [@vue/composition-api]: https://www.npmjs.com/package/@vue/composition-api
 [gsibuttonconfiguration]: https://developers.google.com/identity/gsi/web/reference/js-reference#GsiButtonConfiguration
 [getclientid]: https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid#get_your_google_api_client_id
+
