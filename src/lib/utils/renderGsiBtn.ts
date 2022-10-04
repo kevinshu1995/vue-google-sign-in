@@ -64,7 +64,7 @@ const initGoogle = (configs: GsiBtnConfig, log: CustomConsole | null): void => {
 export function RenderGsiBtn(configs: GsiBtnConfig): GsiBtn {
     const log: CustomConsole | null = Log(configs.debug ?? false);
 
-    const { triggerPrompt } = configs;
+    const { trigger_prompt } = configs;
 
     const initialize = () => {
         log?.info("before loading google script");
@@ -72,9 +72,10 @@ export function RenderGsiBtn(configs: GsiBtnConfig): GsiBtn {
         loadGoogleScript(() => {
             log?.info("google script loaded. now initializing and render button");
             initGoogle(configs, log);
+            console.log("configs", configs);
 
             const g = (window as any).google;
-            if (g && triggerPrompt) {
+            if (g && trigger_prompt) {
                 g.accounts.id.prompt();
             }
         });

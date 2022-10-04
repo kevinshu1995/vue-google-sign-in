@@ -24,7 +24,7 @@ export interface GsiBtnConfig extends Omit<IdConfiguration, "callback"> {
         HTMLElement: HTMLElement | null;
         themeConfig: GsiButtonConfiguration;
     };
-    triggerPrompt?: Boolean;
+    trigger_prompt?: Boolean;
     debug?: Boolean;
 }
 

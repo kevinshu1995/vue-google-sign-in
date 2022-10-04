@@ -16,6 +16,14 @@ const btnConfigs: GsiButtonConfiguration = {
 </script>
 
 <template>
-    <VueGoogleSignInButton :client-id="clientId" :button-configs="btnConfigs" />
+    <div>
+        <div id="prompt-parent"></div>
+        <VueGoogleSignInButton
+            :client-id="clientId"
+            :trigger-prompt="true"
+            prompt-parent-id="prompt-parent"
+            :button-configs="btnConfigs"
+        />
+    </div>
 </template>
 
